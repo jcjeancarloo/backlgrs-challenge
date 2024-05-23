@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 class Clock {
   private prev: number
   constructor() {
@@ -15,6 +16,9 @@ class Clock {
 const server = async (): Promise<void> => {
   const clock = new Clock()
   console.log(clock.bench(), '🟧 Starting...')
+
+  await import('@/main/container')
+  console.log(clock.bench(), '🟧 DI container loaded')
 
   const { PORT } = await import('@/constants')
   const { setApp } = await import('./config/app')
