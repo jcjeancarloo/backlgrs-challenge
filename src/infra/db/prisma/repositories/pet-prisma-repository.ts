@@ -7,4 +7,10 @@ export class PetPrismaRepository implements PetRepository.PetRepository {
       data: params,
     })
   }
+
+  async list(params: PetRepository.List.Params): Promise<PetRepository.List.Result> {
+    return await this.prisma.pet.findMany({
+      where: params,
+    })
+  }
 }
