@@ -1,7 +1,7 @@
 import { BadRequestError } from '@/app/errors'
-import { RecoverPasswordRepository } from '@/app/protocols/db/repositories/recover-password'
+import * as RecoverPasswordRepository from '@/app/protocols/db/repositories/recover-password'
 
-import { UserRepository } from '@/app/protocols/db/repositories/users'
+import * as UserRepository from '@/app/protocols/db/repositories/users'
 import { SendEmail } from '@/app/protocols/e-mail'
 
 import { ResetPasswordUsecase } from '@/domain/usecases/authentication'
@@ -12,11 +12,11 @@ import { inject, injectable } from 'tsyringe'
 export class ResetPasswordService implements ResetPasswordUsecase {
   constructor(
     @inject('UserRepository')
-    private readonly userRepository: UserRepository,
+    private readonly userRepository: UserRepository.GetByEmail,
     @inject('EmailManager')
     private readonly sendEmail: SendEmail,
     @inject('RecoverPasswordRepository')
-    private readonly recoverPasswordRepository: RecoverPasswordRepository,
+    private readonly recoverPasswordRepository: RecoverPasswordRepository.Create,
   ) {}
 
   async perform({ email }: ResetPasswordUsecase.Params): Promise<ResetPasswordUsecase.Result> {

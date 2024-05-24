@@ -62,7 +62,7 @@ describe('Login service', () => {
     expect(hasherStub.compare).toHaveBeenCalledTimes(1)
   })
 
-  it('should throw error on email os password invalid', async () => {
+  it('should throw error on email or password invalid', async () => {
     repoUserRepositoryStub.getByEmail.mockResolvedValue(null)
 
     await expect(sut.perform(params)).rejects.toThrow('E-mail or password invalid')
