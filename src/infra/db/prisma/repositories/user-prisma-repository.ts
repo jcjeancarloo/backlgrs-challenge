@@ -22,6 +22,19 @@ export class UserPrismaRepository implements UserRepository.UserRepository {
     })
   }
 
+  async get(params: UserRepository.Get.Params): Promise<UserRepository.Get.Result> {
+    const user = await this.prisma.user.findUnique({
+      where: params,
+    })
+
+    if (user) {
+      const withoutAttrs = excludeAttribute(user, ['createdAt', 'updatedAt, password'])
+      return withoutAttrs as UserRepository.Get.Result
+    }
+
+    return user
+  }
+
   async getByEmail(
     params: UserRepository.GetByEmail.Params,
   ): Promise<UserRepository.GetByEmail.Result> {
