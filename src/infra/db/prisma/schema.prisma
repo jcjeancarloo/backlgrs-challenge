@@ -31,3 +31,13 @@ model Pet {
 
   @@map("pets")
 }
+
+model RecoverPassword {
+  id             String   @id @default(uuid())
+  codeValidation String
+  userId         String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("recover_password")
+}
