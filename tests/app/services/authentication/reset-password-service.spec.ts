@@ -69,7 +69,7 @@ describe('Reset Password service', () => {
     repoUserRepositoryStub.getByEmail.mockResolvedValue(null)
 
     await expect(sut.perform(params)).rejects.toThrow('User not found')
-    expect(repoUserRepositoryStub.getByEmail).toHaveBeenCalledWith(expect.anything())
+    expect(repoUserRepositoryStub.getByEmail).toHaveBeenCalledWith({ email: params.email })
     expect(repoUserRepositoryStub.getByEmail).toHaveBeenCalledTimes(1)
   })
 })

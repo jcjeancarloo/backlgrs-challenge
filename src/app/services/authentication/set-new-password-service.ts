@@ -1,7 +1,7 @@
 import { BadRequestError } from '@/app/errors'
 import { type Hasher } from '@/app/protocols/cryptography'
-import { RecoverPasswordRepository } from '@/app/protocols/db/repositories/recover-password'
-import { UserRepository } from '@/app/protocols/db/repositories/users'
+import * as RecoverPasswordRepository from '@/app/protocols/db/repositories/recover-password'
+import * as UserRepository from '@/app/protocols/db/repositories/users'
 
 import { SetNewPasswordUsecase } from '@/domain/usecases/authentication'
 import { inject, injectable } from 'tsyringe'
@@ -10,9 +10,10 @@ import { inject, injectable } from 'tsyringe'
 export class SetNewPasswordService implements SetNewPasswordUsecase {
   constructor(
     @inject('UserRepository')
-    private readonly userRepository: UserRepository,
+    private readonly userRepository: UserRepository.GetByEmail & UserRepository.Update,
     @inject('RecoverPasswordRepository')
-    private readonly recoverPasswordRepository: RecoverPasswordRepository,
+    private readonly recoverPasswordRepository: RecoverPasswordRepository.Get &
+      RecoverPasswordRepository.Delete,
     @inject('Hasher') private readonly hasher: Hasher.Hash,
   ) {}
 
