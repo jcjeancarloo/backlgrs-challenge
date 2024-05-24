@@ -27,4 +27,6 @@ model Pet {
   isAvailable Boolean
   user        User?   @relation(fields: [userId], references: [id])
   userId      String?
+
+  @@map("pets")
 }

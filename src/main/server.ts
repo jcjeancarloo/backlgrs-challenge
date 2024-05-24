@@ -17,6 +17,10 @@ const server = async (): Promise<void> => {
   const clock = new Clock()
   console.log(clock.bench(), '🟧 Starting...')
 
+  const { dbHelper } = await import('@/infra/db/prisma/database-helper')
+  await dbHelper.connect()
+  console.log(clock.bench(), '🟧 Database connected')
+
   await import('@/main/container')
   console.log(clock.bench(), '🟧 DI container loaded')
 
