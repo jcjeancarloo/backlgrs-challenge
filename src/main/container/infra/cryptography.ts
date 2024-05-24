@@ -1,7 +1,6 @@
 import { Hasher, Signer } from '@/app/protocols/cryptography'
 import { HASHER_SALT, JWT_EXPIRE_MS, JWT_SECRET } from '@/constants'
-import { BcryptAdapter } from '@/infra/cryptography'
-import { JwtAdapter } from '@/infra/cryptography/jwt-adapter'
+import { BcryptAdapter, JwtAdapter } from '@/infra/cryptography'
 
 import { container } from 'tsyringe'
 
