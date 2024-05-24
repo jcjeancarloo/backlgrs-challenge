@@ -1,14 +1,15 @@
 import { BadRequestError } from '@/app/errors'
-import { PetRepository } from '@/app/protocols/db/repositories/pets'
-import { UserRepository } from '@/app/protocols/db/repositories/users'
+import * as PetRepository from '@/app/protocols/db/repositories/pets'
+import * as UserRepository from '@/app/protocols/db/repositories/users'
 import { AdoptPetUsecase } from '@/domain/usecases'
 import { inject, injectable } from 'tsyringe'
 
 @injectable()
 export class AdoptPetService implements AdoptPetUsecase {
   constructor(
-    @inject('PetRepository') private readonly petRepository: PetRepository,
-    @inject('UserRepository') private readonly userRepository: UserRepository,
+    @inject('PetRepository')
+    private readonly petRepository: PetRepository.Get & PetRepository.Update,
+    @inject('UserRepository') private readonly userRepository: UserRepository.Get,
   ) {}
   async perform(params: AdoptPetUsecase.Params): Promise<AdoptPetUsecase.Result> {
     const pet = await this.petRepository.get({ id: params.id })
