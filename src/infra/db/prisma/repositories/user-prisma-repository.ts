@@ -1,4 +1,4 @@
-import * as UserRepository from '@/app/protocols/repositories/users'
+import * as UserRepository from '@/app/protocols/db/repositories/users'
 import { excludeAttribute } from '@/utils'
 import { dbHelper } from '../database-helper'
 export class UserPrismaRepository implements UserRepository.UserRepository {
