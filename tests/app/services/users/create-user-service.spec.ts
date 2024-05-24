@@ -1,4 +1,4 @@
-import { Hasher, Signer } from '@/app/protocols/cryptography'
+import { Hasher } from '@/app/protocols/cryptography'
 import * as UserRepository from '@/app/protocols/db/repositories/users'
 import { CreateUserService } from '@/app/services'
 import { CreateUserUsecase } from '@/domain/usecases'
@@ -7,7 +7,6 @@ import { mock, type MockProxy } from 'jest-mock-extended'
 
 interface UserRepositoryMock extends UserRepository.Create, UserRepository.GetByEmail {}
 interface HasherMock extends Hasher {}
-interface SignerMock extends Signer {}
 
 let params: CreateUserUsecase.Params
 

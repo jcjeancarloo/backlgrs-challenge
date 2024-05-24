@@ -4,7 +4,10 @@ import { inject, injectable } from 'tsyringe'
 
 @injectable()
 export class CreatePetService implements CreatePetUsecase {
-  constructor(@inject('PetRepository') private readonly petRepository: PetRepository.Create) {}
+  constructor(
+    @inject('PetRepository')
+    private readonly petRepository: PetRepository.Create & PetRepository.Get,
+  ) {}
   async perform(params: CreatePetUsecase.Params): Promise<CreatePetUsecase.Result> {
     return await this.petRepository.create(params)
   }
