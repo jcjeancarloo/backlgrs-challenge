@@ -1,3 +1,4 @@
+export * from './adopt-pet-usecase'
 export * from './create-pet-usecase'
 export * from './delete-pet-usecase'
 export * from './list-pets-usecase'

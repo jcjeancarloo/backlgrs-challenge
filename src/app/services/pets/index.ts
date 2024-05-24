@@ -1,3 +1,4 @@
+export * from './adopt-pet-service'
 export * from './create-pet-service'
 export * from './delete-pet-service'
 export * from './list-pets-service'

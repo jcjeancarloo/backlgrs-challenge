@@ -1,5 +1,5 @@
-import { UpdatePetUsecase } from '@/domain/usecases'
-import { ok } from '@/presentation/helpers/http-helper'
+import { AdoptPetUsecase } from '@/domain/usecases'
+import { noContent } from '@/presentation/helpers/http-helper'
 import { type Controller, type HttpRequest, type HttpResponse } from '@/presentation/protocols'
 import { inject, injectable } from 'tsyringe'
 import * as yup from 'yup'
@@ -9,16 +9,13 @@ type ValidHttpRequest = {
     id: string
   }
   body: {
-    name?: string
-    photo?: string
-    breed?: string
-    isAvailable?: boolean
+    userId: string
   }
 }
 
 @injectable()
-export class UpdatePetController implements Controller {
-  constructor(@inject('UpdatePetUsecase') private readonly updatePet: UpdatePetUsecase) {}
+export class AdoptPetController implements Controller {
+  constructor(@inject('AdoptPetUsecase') private readonly adoptPet: AdoptPetUsecase) {}
 
   async validate(httpRequest: HttpRequest): Promise<ValidHttpRequest> {
     return yup
@@ -27,18 +24,15 @@ export class UpdatePetController implements Controller {
           id: yup.string().uuid().required(),
         }),
         body: yup.object({
-          name: yup.string(),
-          photo: yup.string(),
-          breed: yup.string(),
-          isAvailable: yup.boolean(),
+          userId: yup.string().required(),
         }),
       })
       .validate(httpRequest, { abortEarly: false })
   }
 
   async execute({ params, body }: HttpRequest): Promise<HttpResponse> {
-    const pet = await this.updatePet.perform({ ...params, ...body })
-    return ok(pet)
+    await this.adoptPet.perform({ ...params, ...body })
+    return noContent()
   }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {

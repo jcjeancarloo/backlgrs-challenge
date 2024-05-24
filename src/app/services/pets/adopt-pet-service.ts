@@ -1,17 +1,19 @@
 import { BadRequestError } from '@/app/errors'
 import { PetRepository } from '@/app/protocols/db/repositories/pets'
-import { UpdatePetUsecase } from '@/domain/usecases'
+import { AdoptPetUsecase } from '@/domain/usecases'
 import { inject, injectable } from 'tsyringe'
 
 @injectable()
-export class UpdatePetService implements UpdatePetUsecase {
+export class AdoptPetService implements AdoptPetUsecase {
   constructor(@inject('PetRepository') private readonly petRepository: PetRepository) {}
-  async perform(params: UpdatePetUsecase.Params): Promise<UpdatePetUsecase.Result> {
+  async perform(params: AdoptPetUsecase.Params): Promise<AdoptPetUsecase.Result> {
     const pet = await this.petRepository.get({ id: params.id })
     if (!pet) throw new BadRequestError('Pet not found')
 
-    const { userId, ...withoutUser } = params
-
-    return this.petRepository.update(withoutUser)
+    return this.petRepository.update({
+      id: params.id,
+      userId: params.userId,
+      isAvailable: false,
+    })
   }
 }
