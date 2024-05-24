@@ -25,4 +25,10 @@ export class PetPrismaRepository implements PetRepository.PetRepository {
       data: params,
     })
   }
+
+  async delete(params: PetRepository.Delete.Params): Promise<PetRepository.Delete.Result> {
+    await this.prisma.pet.delete({
+      where: { id: params.id },
+    })
+  }
 }

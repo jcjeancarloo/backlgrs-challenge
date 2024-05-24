@@ -1,6 +1,7 @@
 import { adaptController } from '@/main/adapters'
 import {
   CreatePetController,
+  DeletePetController,
   ListPetsController,
   UpdatePetController,
 } from '@/presentation/controllers'
@@ -11,4 +12,5 @@ export default (router: Express): void => {
   router.get('/pets', adaptController(ListPetsController.name))
   router.post('/pets', adaptController(CreatePetController.name))
   router.put('/pets/:id', adaptController(UpdatePetController.name))
+  router.delete('/pets/:id', adaptController(DeletePetController.name))
 }
