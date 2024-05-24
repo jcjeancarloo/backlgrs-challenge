@@ -4,9 +4,16 @@ import { dbHelper } from '../database-helper'
 export class UserPrismaRepository implements UserRepository.UserRepository {
   private prisma = dbHelper.client
   async create(params: UserRepository.Create.Params): Promise<UserRepository.Create.Result> {
-    return await this.prisma.user.create({
+    const user = await this.prisma.user.create({
       data: params,
     })
+
+    if (user) {
+      const withoutAttrs = excludeAttribute(user, ['createdAt', 'updatedAt', 'password'])
+      return withoutAttrs as UserRepository.Create.Result
+    }
+
+    return user
   }
 
   async list(params: UserRepository.List.Params): Promise<UserRepository.List.Result> {

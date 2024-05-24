@@ -1,8 +1,9 @@
 import { adaptController } from '@/main/adapters'
-import { ListUserController } from '@/presentation/controllers/users/list-users-controller'
+import { CreateUserController, ListUserController } from '@/presentation/controllers'
 
 import { type Express } from 'express'
 
 export default (router: Express): void => {
+  router.post('/users', adaptController(CreateUserController.name))
   router.get('/users', adaptController(ListUserController.name))
 }
