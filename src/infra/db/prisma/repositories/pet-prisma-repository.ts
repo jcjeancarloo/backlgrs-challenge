@@ -13,4 +13,16 @@ export class PetPrismaRepository implements PetRepository.PetRepository {
       where: params,
     })
   }
+  async get(params: PetRepository.Get.Params): Promise<PetRepository.Get.Result> {
+    return await this.prisma.pet.findUnique({
+      where: { id: params.id },
+    })
+  }
+
+  async update(params: PetRepository.Update.Params): Promise<PetRepository.Update.Result> {
+    return await this.prisma.pet.update({
+      where: { id: params.id },
+      data: params,
+    })
+  }
 }
