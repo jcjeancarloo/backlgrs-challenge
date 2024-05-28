@@ -8,7 +8,6 @@ type ValidHttpRequest = {
   body: {
     name: string
     email: string
-    avatar: string
     password: string
   }
 }
@@ -23,7 +22,6 @@ export class CreateUserController implements Controller {
         body: yup.object({
           name: yup.string().required(),
           email: yup.string().email().required(),
-          avatar: yup.string().required(),
           password: yup.string().required(),
         }),
       })
