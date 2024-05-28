@@ -12,6 +12,7 @@ type ValidHttpRequest = {
     weight: number
     age: number
     sex: 'male' | 'female'
+    animal: 'dog' | 'cat'
     description: string
   }
 }
@@ -30,6 +31,7 @@ export class CreatePetController implements Controller {
           weight: yup.number().required(),
           age: yup.number().min(1).required(),
           sex: yup.string().oneOf(['male', 'female']).required(),
+          animal: yup.string().oneOf(['dog', 'cat']).required(),
           description: yup.string().required(),
         }),
       })
