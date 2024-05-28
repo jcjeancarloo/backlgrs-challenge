@@ -6,6 +6,7 @@ export namespace ListPetsUsecase {
   export type Params = {
     breed?: string
     isAvailable?: boolean
+    userId?: string
   }
 
   export type Result = Pet[]

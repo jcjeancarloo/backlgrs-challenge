@@ -8,6 +8,7 @@ type ValidHttpRequest = {
   query: {
     breed?: string
     isAvailable?: boolean
+    userId?: string
   }
 }
 
@@ -21,6 +22,7 @@ export class ListPetsController implements Controller {
         query: yup.object({
           breed: yup.string(),
           isAvailable: yup.boolean(),
+          userId: yup.string(),
         }),
       })
       .validate(httpRequest, { abortEarly: false })
