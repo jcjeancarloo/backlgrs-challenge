@@ -9,6 +9,10 @@ type ValidHttpRequest = {
     name: string
     photo: string
     breed: string
+    weight: number
+    age: number
+    sex: 'male' | 'female'
+    description: string
   }
 }
 
@@ -23,6 +27,10 @@ export class CreatePetController implements Controller {
           name: yup.string().required(),
           photo: yup.string().required(),
           breed: yup.string().required(),
+          weight: yup.number().required(),
+          age: yup.number().min(1).required(),
+          sex: yup.string().oneOf(['male', 'female']).required(),
+          description: yup.string().required(),
         }),
       })
       .validate(httpRequest, { abortEarly: false })
