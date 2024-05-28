@@ -11,6 +11,9 @@ export class PetPrismaRepository implements PetRepository.PetRepository {
   async list(params: PetRepository.List.Params): Promise<PetRepository.List.Result> {
     return await this.prisma.pet.findMany({
       where: params,
+      orderBy: {
+        createdAt: 'desc',
+      },
     })
   }
   async get(params: PetRepository.Get.Params): Promise<PetRepository.Get.Result> {

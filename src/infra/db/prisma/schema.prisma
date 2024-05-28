@@ -43,6 +43,8 @@ model Pet {
   isAvailable Boolean    @default(true)
   user        User       @relation(fields: [userId], references: [id])
   userId      String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 
   @@map("pets")
 }
