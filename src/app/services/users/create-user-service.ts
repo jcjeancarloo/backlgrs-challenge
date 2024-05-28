@@ -29,7 +29,7 @@ export class CreateUserService implements CreateUserUsecase {
         text: `Explore nosso site e dê um lar para um novo amigo`,
       })
     } catch (error) {
-      throw new BadRequestError('Error sending recovery password e-mail')
+      throw new BadRequestError('Error sending welcome e-mail')
     }
 
     return createdUser
