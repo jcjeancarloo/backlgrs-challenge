@@ -7,7 +7,14 @@ services:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=petback
-    volumes:
-      - polls_pg_data:/bitnami/postgresql
-volumes:
-  polls_pg_data:
+
+  node-app:
+    build: .
+    environment:
+      - DATABASE_URL=postgresql://docker:docker@postgres:5432/petback?schema=public
+    depends_on:
+      - postgres
+    ports:
+      - '3333:3333'
+    command: >
+      sh -c "yarn install && npx prisma migrate deploy --schema=src/infra/db/prisma/schema.prisma && npx prisma generate --schema=src/infra/db/prisma/schema.prisma && npx prisma db seed && yarn dev"
