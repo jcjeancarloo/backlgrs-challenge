@@ -17,4 +17,19 @@ export class JwtAdapter implements Signer {
     })
     return accessToken
   }
+
+  async verify(token: Signer.Verify.Param): Promise<Signer.Verify.Result> {
+    const payload = jwt.verify(token, this.secret, (error, decoded) => {
+      if (error) return undefined
+      return decoded
+    })
+    if (payload === null || payload === undefined) return undefined
+    return payload
+  }
+
+  async decode(param: Signer.Decode.Param): Promise<Signer.Decode.Result> {
+    const payload = jwt.decode(param, { json: true })
+    if (payload === null || payload === undefined) return undefined
+    return payload
+  }
 }
