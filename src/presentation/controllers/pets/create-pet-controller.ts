@@ -14,7 +14,6 @@ type ValidHttpRequest = {
     sex: 'male' | 'female'
     animal: 'dog' | 'cat'
     description: string
-    isAvailable: boolean
   }
 }
 
@@ -34,7 +33,6 @@ export class CreatePetController implements Controller {
           sex: yup.string().oneOf(['male', 'female']).required(),
           animal: yup.string().oneOf(['dog', 'cat']).required(),
           description: yup.string().required(),
-          isAvailable: yup.boolean().required(),
         }),
       })
       .validate(httpRequest, { abortEarly: false })
