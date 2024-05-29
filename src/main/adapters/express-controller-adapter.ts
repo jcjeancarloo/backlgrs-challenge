@@ -14,6 +14,7 @@ export const adaptController = (controllerClassName: string) => {
         params: req.params,
         query: req.query,
         body: req.body,
+        file: req.file,
         locals: res.locals,
       })
       return res.status(httpResponse.statusCode).json(httpResponse.body)

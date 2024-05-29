@@ -4,6 +4,7 @@ export interface HttpRequest {
   query?: any
   body?: any
   locals?: any
+  file?: any
 }
 
 export interface HttpResponse {

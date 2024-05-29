@@ -9,12 +9,14 @@ import {
 
 import { type Express } from 'express'
 import { AuthenticationMiddleware } from '../middlewares'
+import { upload } from '../middlewares/multer'
 
 export default (router: Express): void => {
   router.get('/pets', adaptController(ListPetsController.name))
   router.post(
     '/pets',
-    adaptMiddleware(AuthenticationMiddleware.name),
+    upload.single('photo'),
+    // adaptMiddleware(AuthenticationMiddleware.name),
     adaptController(CreatePetController.name),
   )
   router.put(
