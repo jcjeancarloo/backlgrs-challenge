@@ -8,11 +8,15 @@
     "test": "jest --passWithNoTests --runInBand",
     "test:cov": "jest --coverage"
   },
+  "prisma": {
+    "seed": "tsx src/infra/db/prisma/seed.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
     "@types/jsonwebtoken": "^9.0.6",
