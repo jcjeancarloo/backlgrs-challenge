@@ -23,12 +23,18 @@ const mockPet: PetRepository.Get.Result = {
   isAvailable: true,
   photo: faker.image.avatar(),
   userId: faker.string.uuid(),
+  age: faker.number.int(),
+  sex: 'male',
+  description: faker.string.sample(),
+  animal: 'dog',
+  weight: faker.number.int(),
+  createdAt: faker.date.anytime(),
+  updatedAt: faker.date.anytime(),
 }
 
 const mockUser: UserRepository.GetByEmail.Result = {
   id: faker.string.uuid(),
   name: faker.person.firstName(),
-  avatar: faker.image.avatar(),
   email: faker.internet.email(),
   password: faker.internet.password(),
   updatedAt: faker.date.anytime(),

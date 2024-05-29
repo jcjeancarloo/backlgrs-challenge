@@ -12,13 +12,20 @@ let repoPetRepositoryStub: MockProxy<PetRepositoryMock>
 
 let sut: CreatePetService
 
-const mockPet: PetRepository.Create.Result = {
+const mockPet: PetRepository.Get.Result = {
   id: faker.string.uuid(),
   name: faker.person.firstName(),
   breed: faker.string.alpha(),
   isAvailable: true,
   photo: faker.image.avatar(),
   userId: faker.string.uuid(),
+  age: faker.number.int(),
+  sex: 'male',
+  description: faker.string.sample(),
+  animal: 'dog',
+  weight: faker.number.int(),
+  createdAt: faker.date.anytime(),
+  updatedAt: faker.date.anytime(),
 }
 
 describe('Create pet service', () => {
@@ -30,6 +37,13 @@ describe('Create pet service', () => {
       photo: 'img-url',
       breed: 'Pitbull',
       isAvailable: true,
+      age: 1,
+      animal: 'dog',
+      sex: 'male',
+      description: 'xpto',
+      weight: 1,
+      updatedAt: faker.date.anytime(),
+      createdAt: faker.date.anytime(),
     }
 
     repoPetRepositoryStub = mock<PetRepositoryMock>()
