@@ -11,5 +11,8 @@
       "src": "(.*)",
       "dest": "src/main/server.ts"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  }
 }
