@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "tsx watch src/main/server.ts",
     "test": "jest --passWithNoTests --runInBand",
-    "test:cov": "jest --coverage"
+    "test:cov": "jest --coverage",
+    "vercel-build": "npx prisma migrate deploy"
   },
   "prisma": {
     "seed": "tsx src/infra/db/prisma/seed.ts"
