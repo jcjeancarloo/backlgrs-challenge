@@ -8,9 +8,6 @@ type ValidHttpRequest = {
   params: {
     id: string
   }
-  body: {
-    userId: string
-  }
 }
 
 @injectable()
@@ -23,15 +20,12 @@ export class AdoptPetController implements Controller {
         params: yup.object({
           id: yup.string().uuid().required(),
         }),
-        body: yup.object({
-          userId: yup.string().required(),
-        }),
       })
       .validate(httpRequest, { abortEarly: false })
   }
 
-  async execute({ params, body }: HttpRequest): Promise<HttpResponse> {
-    await this.adoptPet.perform({ ...params, ...body })
+  async execute({ params, locals }: HttpRequest): Promise<HttpResponse> {
+    await this.adoptPet.perform({ ...params, userId: locals.user.id })
     return noContent()
   }
 

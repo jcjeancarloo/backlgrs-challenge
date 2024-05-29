@@ -38,8 +38,8 @@ export class CreatePetController implements Controller {
       .validate(httpRequest, { abortEarly: false })
   }
 
-  async execute({ body }: HttpRequest): Promise<HttpResponse> {
-    const pet = await this.createPet.perform(body)
+  async execute({ body, locals }: HttpRequest): Promise<HttpResponse> {
+    const pet = await this.createPet.perform({ ...body, userId: locals.user.id })
     return created(pet)
   }
 
