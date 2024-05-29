@@ -23,6 +23,7 @@ async function main() {
         sex: 'male',
         weight: 1,
         userId: created.id,
+        isAvailable: true,
       },
     })
   }
