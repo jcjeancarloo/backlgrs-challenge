@@ -23,7 +23,6 @@ let sut: SetNewPasswordService
 const mockUser: UserRepository.GetByEmail.Result = {
   id: faker.string.uuid(),
   name: faker.person.firstName(),
-  avatar: faker.image.avatar(),
   email: faker.internet.email(),
   password: faker.internet.password(),
   updatedAt: faker.date.anytime(),

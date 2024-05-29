@@ -19,7 +19,6 @@ let sut: LoginService
 const mockUser: UserRepository.GetByEmail.Result = {
   id: faker.string.uuid(),
   name: faker.person.firstName(),
-  avatar: faker.image.avatar(),
   email: faker.internet.email(),
   password: faker.internet.password(),
   updatedAt: faker.date.anytime(),
@@ -48,7 +47,6 @@ describe('Login service', () => {
     const result = await sut.perform(params)
 
     expect(result.id).toEqual(mockUser.id)
-    expect(result.avatar).toEqual(mockUser.avatar)
     expect(result.email).toEqual(mockUser.email)
     expect(result.name).toEqual(mockUser.name)
     expect(result.access_token).toEqual('aaaa')
